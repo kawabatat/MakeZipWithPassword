@@ -1,0 +1,186 @@
+﻿<Window x:Class="PasswordZipMaker.View.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        
+        xmlns:localvm="clr-namespace:PasswordZipMaker.ViewModel"
+        xmlns:localview="clr-namespace:PasswordZipMaker.View"
+        xmlns:properties="clr-namespace:PasswordZipMaker.Properties"
+        
+        FontFamily="Meiryo UI" FontSize="12"
+        Title="{x:Static properties:Resources.WindowTitle}" 
+        Height="320" Width="300" 
+        ResizeMode="CanMinimize">
+
+    <!-- ViewとViewModelのマッピング -->
+    <Window.DataContext>
+        <localvm:MainWindowViewModel />
+    </Window.DataContext>
+    
+    <Window.Resources>
+        <!-- Resourcesに登録しておく -->
+        <properties:Resources x:Key="resources" />
+    </Window.Resources>
+    
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="5*" />
+            <RowDefinition Height="6*" />
+            <RowDefinition Height="3*" />
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+
+
+        <!-- Zip -->
+        <Grid Grid.Row ="0" Grid.RowSpan="1" Grid.Column ="0" Grid.ColumnSpan="1">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="5" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="5" />
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="5" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="5" />
+            </Grid.ColumnDefinitions>
+            <Grid Grid.Row ="1" Grid.RowSpan="1" Grid.Column ="1" Grid.ColumnSpan="1" Background="YellowGreen" />
+        </Grid>
+        <Grid Grid.Row ="0" Grid.Column ="1" >
+            <Grid.RowDefinitions>
+                <RowDefinition Height="20" />
+                <RowDefinition Height="3*" />
+                <RowDefinition Height="5*" />
+                <RowDefinition Height="3*" />
+                <RowDefinition Height="5*" />
+                <RowDefinition Height="2*" />
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="1*" />
+                <ColumnDefinition Width="1*" />
+                <ColumnDefinition Width="3*" />
+                <ColumnDefinition Width="10*" />
+                <ColumnDefinition Width="2*" />
+                <ColumnDefinition Width="1*" />
+            </Grid.ColumnDefinitions>
+            <Grid Grid.Row ="0" Grid.RowSpan="1" Grid.Column ="0" Grid.ColumnSpan="6" Background="LightGray">
+                <TextBlock Text="{x:Static properties:Resources.LabelZipSettingArea}" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="2"  />
+            </Grid>
+            <Grid Grid.Row ="1" Grid.Column ="1" Grid.ColumnSpan="2">
+                <TextBlock Text="{x:Static properties:Resources.LabelZipSource}" HorizontalAlignment="Left" VerticalAlignment="Bottom" />
+            </Grid>
+            <Grid Grid.Row ="2" Grid.Column ="2" Grid.ColumnSpan="2">
+                <TextBox Text="{Binding ZipInputFile}" IsReadOnly="{Binding IsZipInputFileTextReadOnly}" HorizontalAlignment="Stretch" VerticalAlignment="Center" TextWrapping="NoWrap"  />
+            </Grid>
+            <Grid Grid.Row ="2" Grid.Column ="4">
+                <Button Content="{x:Static properties:Resources.ButtonSelectInputFile}" Command="{Binding SelectedInputFile}" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="3" />
+            </Grid>
+            <Grid Grid.Row ="3" Grid.Column ="1" Grid.ColumnSpan="2">
+                <TextBlock Text="{x:Static properties:Resources.LabelZipDestination}" HorizontalAlignment="Left" VerticalAlignment="Bottom" />
+            </Grid>
+            <Grid Grid.Row ="4" Grid.Column ="2" Grid.ColumnSpan="2">
+                <TextBox Text="{Binding ZipSaveFile}" IsReadOnly="{Binding IsZipSaveFileTextReadOnly}" HorizontalAlignment="Stretch" VerticalAlignment="Center" TextWrapping="NoWrap"  />
+            </Grid>
+        </Grid>
+
+        <!-- Setting -->
+        <Grid Grid.Row ="1" Grid.RowSpan="1" Grid.Column ="0" Grid.ColumnSpan="1">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="5" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="5" />
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="5" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="5" />
+            </Grid.ColumnDefinitions>
+            <Grid Grid.Row ="1" Grid.RowSpan="1" Grid.Column ="1" Grid.ColumnSpan="1" Background="BlanchedAlmond" />
+        </Grid>
+        <Grid Grid.Row ="1" Grid.Column ="1" >
+            <Grid.RowDefinitions>
+                <RowDefinition Height="20" />
+                <RowDefinition Height="10*" />
+                <RowDefinition Height="1*" />
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="1*" />
+                <ColumnDefinition Width="2*" />
+                <ColumnDefinition Width="1*" />
+                <ColumnDefinition Width="6*" />
+                <ColumnDefinition Width="1*" />
+            </Grid.ColumnDefinitions>
+            <Grid Grid.Row ="0" Grid.Column ="0" Grid.ColumnSpan="6" Background="LightGray">
+                <TextBlock Text="{x:Static properties:Resources.LabelPasswordSettingArea}" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="2" />
+            </Grid>
+            <Grid Grid.Row ="1" Grid.Column ="1">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="20*" />
+                    <RowDefinition Height="1*" />
+                    <RowDefinition Height="20*" />
+                </Grid.RowDefinitions>
+                <Grid Grid.Row ="0" Grid.Column ="0">
+                    <TextBlock Text="{x:Static properties:Resources.LabelLength}" HorizontalAlignment="Left" VerticalAlignment="Bottom" />
+                </Grid>
+                <Grid Grid.Row ="2" Grid.Column ="0">
+                    <TextBox Text="{Binding LengthText}" IsReadOnly="{Binding IsLengthTextReadOnly}" HorizontalAlignment="Stretch" VerticalAlignment="Top" TextWrapping="NoWrap"  />
+                </Grid>
+            </Grid>
+
+            <Grid Grid.Row ="1" Grid.Column ="3" >
+                <WrapPanel Name="SelectKind" Orientation="Vertical" HorizontalAlignment="Stretch" VerticalAlignment="Center" >
+                    <CheckBox Content="{x:Static properties:Resources.KindOfCharctorNumber}" IsChecked="{Binding IsNumberSelected}" Margin="2" />
+                    <CheckBox Content="{x:Static properties:Resources.KindOfCharctorLower}" IsChecked="{Binding IsLowerAlphabetSelected}" Margin="2" />
+                    <CheckBox Content="{x:Static properties:Resources.KindOfCharctorUpper}" IsChecked="{Binding IsUpperAlphabetSelected}" Margin="2" />
+                    <CheckBox Content="{x:Static properties:Resources.KindOfCharctorSymbol}" IsChecked="{Binding IsSymbolSelected}" Margin="2" />
+                </WrapPanel>
+            </Grid>
+        </Grid>
+
+
+        <!-- Target -->
+        <Grid Grid.Row ="3" Grid.RowSpan="1" Grid.Column ="0" Grid.ColumnSpan="1">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="5" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="5" />
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="5" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="5" />
+            </Grid.ColumnDefinitions>
+            <Grid Grid.Row ="1" Grid.RowSpan="1" Grid.Column ="1" Grid.ColumnSpan="1" Background="SkyBlue" />
+        </Grid>
+        <Grid Grid.Row ="3" Grid.Column ="1" >
+            <Grid.RowDefinitions>
+                <RowDefinition Height="20" />
+                <RowDefinition Height="5*" />
+                <RowDefinition Height="1*" />
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="1*" />
+                <ColumnDefinition Width="4*" />
+                <ColumnDefinition Width="6*" />
+                <ColumnDefinition Width="5*" />
+                <ColumnDefinition Width="1*" />
+            </Grid.ColumnDefinitions>
+            <Grid Grid.Row ="0" Grid.Column ="0" Grid.ColumnSpan="5" Background="LightGray" >
+                <TextBlock Text="{x:Static properties:Resources.LabelResult}" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="2" />
+            </Grid>
+            <Grid Grid.Row ="1" Grid.Column ="1">
+                <TextBlock Text="{x:Static properties:Resources.LabelMadePassword}" HorizontalAlignment="Center" VerticalAlignment="Center" />
+            </Grid>
+            <Grid Grid.Row ="1" Grid.Column ="2">
+                <TextBox Text="{Binding PasswordText}" IsReadOnly="{Binding IsPasswordTextReadOnly}" HorizontalAlignment="Stretch" VerticalAlignment="Center" TextWrapping="NoWrap"  />
+            </Grid>
+            <!-- Command -->
+            <Grid Grid.Row ="1" Grid.Column ="3">
+                <Button Name="btnExecute" Content="{x:Static properties:Resources.ButtonExecuteText}" Command="{Binding ExecuteMaking}" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="5" />
+            </Grid>
+        </Grid>
+
+        
+    </Grid>
+</Window>
